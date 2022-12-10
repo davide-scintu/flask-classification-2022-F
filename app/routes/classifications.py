@@ -1,4 +1,8 @@
 import redis
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+
 from flask import render_template
 from rq import Connection, Queue
 from rq.job import Job
@@ -6,7 +10,7 @@ from rq.job import Job
 from app import app
 from app.forms.classification_form import ClassificationForm
 from app.forms.classification_form_histogram import ClassificationFormHistogram
-from ml.classification_utils import classify_image
+from ml.classification_utils import classify_image, fetch_image
 from config import Configuration
 
 config = Configuration()
@@ -21,7 +25,6 @@ def classifications():
     if form.validate_on_submit():  # POST
         image_id = form.image.data
         model_id = form.model.data
-
         redis_url = Configuration.REDIS_URL
         redis_conn = redis.from_url(redis_url)
         with Connection(redis_conn):
@@ -48,7 +51,28 @@ def classifications_histogram():
     form = ClassificationFormHistogram()
     if form.validate_on_submit():  # POST
         image_id = form.image.data
-        # TODO: Create a new handle that allows picking one image from a list and returns the histogram
+        print("image_id type: ", type(image_id))
+        print("image_id: ", image_id)
+        get_image = fetch_image(image_id)
+        print("get_image type: ", type(get_image))
+        print("get_image: ", get_image)
+        im = cv2.imread(image_id)
+        print("im type: ", type(im))
+        print("im: ", im)
+        #im2 = cv2.imread(get_image)
+        #print(type(im2))
 
-
+        #result = ...
+        return render_template('histogram_output.html', image_id=image_id, result_id=result)
     return render_template('histogram_template.html', form=form)
+
+def plot_histogram(image):
+    im = cv2.imread(image)
+    vals = im.mean(axis=2).flatten()
+    counts, bins = np.histogram(vals, range(257))
+    plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
+    plt.xlim([-0.5, 255.5])
+    plt.show()
+
+
+

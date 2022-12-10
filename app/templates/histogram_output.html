@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <style>
+        .large-front-thumbnail {
+            position: relative;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <img class="large-front-thumbnail"
+                     src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
+                     alt={{ image_id }}/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+                <div class="card ">
+                    <table class="table">
+                        <tr>
+                            <th scope="col">Histogram</th>
+                        </tr>
+                    </table>
+                    <img class="large-front-thumbnail"
+                     src="{{ url_for(result_id) }} "/>
+                </div>
+                <a class="btn btn-primary" href="/classifications_histogram" role="button">Back</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
