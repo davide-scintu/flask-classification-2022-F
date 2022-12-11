@@ -21,6 +21,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col">
                 <div class="card ">
@@ -30,9 +31,9 @@
                         </tr>
                     </table>
                     <img class="large-front-thumbnail"
-                     src="{{ url_for(result_id) }} "/>
+                     src="{{ url_for('static', filename='imagenet_histogram/'+result_id) }}"/>
                 </div>
-                <a class="btn btn-primary" href="/classifications_histogram" role="button">Back</a>
+                    <a class="btn btn-primary" href="/classifications_histogram" role="button">Back</a>
             </div>
         </div>
     </div>

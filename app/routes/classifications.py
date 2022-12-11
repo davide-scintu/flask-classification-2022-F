@@ -10,7 +10,7 @@ from rq.job import Job
 from app import app
 from app.forms.classification_form import ClassificationForm
 from app.forms.classification_form_histogram import ClassificationFormHistogram
-from ml.classification_utils import classify_image, fetch_image
+from ml.classification_utils import classify_image
 from config import Configuration
 
 config = Configuration()
@@ -51,28 +51,26 @@ def classifications_histogram():
     form = ClassificationFormHistogram()
     if form.validate_on_submit():  # POST
         image_id = form.image.data
-        print("image_id type: ", type(image_id))
-        print("image_id: ", image_id)
-        get_image = fetch_image(image_id)
-        print("get_image type: ", type(get_image))
-        print("get_image: ", get_image)
-        im = cv2.imread(image_id)
-        print("im type: ", type(im))
-        print("im: ", im)
-        #im2 = cv2.imread(get_image)
-        #print(type(im2))
+        img_path = f'app/static/imagenet_subset/{image_id}'
+        histogram_img_path = f'app/static/imagenet_histogram/{image_id}'
+        plot_histogram(img_path, histogram_img_path)
 
-        #result = ...
+        result = ...
+        # histogram viewer with the corresponding image feedback
         return render_template('histogram_output.html', image_id=image_id, result_id=result)
+    # image selector
     return render_template('histogram_template.html', form=form)
 
-def plot_histogram(image):
-    im = cv2.imread(image)
+
+def plot_histogram(path, hist_path):
+    im = cv2.imread(path)
     vals = im.mean(axis=2).flatten()
     counts, bins = np.histogram(vals, range(257))
     plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
     plt.xlim([-0.5, 255.5])
-    plt.show()
+    saved_image = plt.savefig(hist_path)
+    return saved_image
+
 
 
 
