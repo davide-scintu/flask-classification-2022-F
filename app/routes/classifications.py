@@ -10,7 +10,7 @@ from rq.job import Job
 from app import app
 from app.forms.classification_form import ClassificationForm
 from app.forms.classification_form_histogram import ClassificationFormHistogram
-from ml.classification_utils import classify_image
+from ml.classification_utils import classify_image, fetch_image
 from config import Configuration
 
 config = Configuration()
@@ -51,11 +51,15 @@ def classifications_histogram():
     form = ClassificationFormHistogram()
     if form.validate_on_submit():  # POST
         image_id = form.image.data
+
         img_path = f'app/static/imagenet_subset/{image_id}'
-        histogram_img_path = f'app/static/imagenet_histogram/{image_id}'
+        histogram_img_path = f'app/static/imagenet_histogram/hist_{image_id}'
+
         plot_histogram(img_path, histogram_img_path)
 
-        result = ...
+        result = form.image.data    # only for testing line
+        #result = ...
+
         # histogram viewer with the corresponding image feedback
         return render_template('histogram_output.html', image_id=image_id, result_id=result)
     # image selector
