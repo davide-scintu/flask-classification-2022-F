@@ -2,18 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 
-from ml.classification_utils import fetch_image
-
 
 def plot_histogram(image):
     im = cv2.imread(image)
-    #print(type(im))
+    # print("im type: ", type(im))
     vals = im.mean(axis=2).flatten()
     counts, bins = np.histogram(vals, range(257))
     plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
     plt.xlim([-0.5, 255.5])
-    plt.show()
-    #plt.savefig('test.png')
+    plt.savefig('test.JPEG')
+    #plt.show()
+
 
 
 def plot_histogram_rgb(image):
@@ -27,8 +26,10 @@ def plot_histogram_rgb(image):
 
 
 img_one_ch = 'app/static/imagenet_subset/n01443537_goldfish.JPEG'
+# print(img_one_ch)
+# print(type(img_one_ch))
 plot_histogram(img_one_ch)
 
-img_rgb = 'app/static/imagenet_subset/n01443537_goldfish.JPEG'
-plot_histogram_rgb(img_rgb)
+# img_rgb = 'app/static/imagenet_subset/n01443537_goldfish.JPEG'
+# plot_histogram_rgb(img_rgb)
 
