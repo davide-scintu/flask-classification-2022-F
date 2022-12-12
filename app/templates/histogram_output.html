@@ -31,9 +31,8 @@
                 <h4>
                     Histogram:
                 </h4>
-                <img src="{{ url_for('static', filename='imagenet_histogram/'+result_id) }} "
-                     class="large-front-thumbnail"
-                     alt={{ result_id }}/>
+                <img src="{{ url_for('static', filename='imagenet_histogram/hist_'+image_id) }} "
+                     class="large-front-thumbnail"/>
                 <a class="btn btn-primary" href="/classifications_histogram" role="button">Back</a>
             </div>
         </div>
