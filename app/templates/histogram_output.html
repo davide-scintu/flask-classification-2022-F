@@ -16,26 +16,24 @@
         <div class="col">
             <div class="card">
                 <h4>
-                    Feedback Image:
+                    <th scope="col">Feedback Image</th>
                 </h4>
-                <img src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
-                     class="large-front-thumbnail"
-                     alt={{ image_id }}/>
+                    <img class="large-front-thumbnail"
+                         src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "/>
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card ">
                 <h4>
-                    Histogram:
+                    <th scope="col">Histogram</th>
                 </h4>
-                <img src="{{ url_for('static', filename='imagenet_histogram/hist_'+image_id) }} "
-                     class="large-front-thumbnail"/>
-                <a class="btn btn-primary" href="/classifications_histogram" role="button">Back</a>
+                <table class="table">
+                    <img class="large-front-thumbnail"
+                         src="{{ url_for('static', filename='imagenet_histogram/hist_'+image_id) }} "/>
+                </table>
+                <a class="btn btn-dark mb-2" href="/classifications_histogram" role="button">Back</a>
             </div>
         </div>
     </div>
-
 {% endblock %}
+
