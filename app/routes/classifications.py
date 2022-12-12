@@ -1,8 +1,4 @@
 import redis
-import numpy as np
-import matplotlib.pyplot as plt
-import cv2
-
 from flask import render_template
 from rq import Connection, Queue
 from rq.job import Job
@@ -10,7 +6,7 @@ from rq.job import Job
 from app import app
 from app.forms.classification_form import ClassificationForm
 from app.forms.classification_form_histogram import ClassificationFormHistogram
-from ml.classification_utils import classify_image
+from ml.classification_utils import classify_image, plot_histogram, clear_dir
 from config import Configuration
 
 config = Configuration()
@@ -63,15 +59,7 @@ def classifications_histogram():
     return render_template('histogram_template.html', form=form)
 
 
-def plot_histogram(path, hist_path):
-    im = cv2.imread(path)
-    vals = im.mean(axis=2).flatten()
-    counts, bins = np.histogram(vals, range(257))
-    plt.clf()   # not to overlap the images
-    plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
-    plt.xlim([-0.5, 255.5])
-    saved_image = plt.savefig(hist_path)
-    return saved_image
+
 
 
 

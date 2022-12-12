@@ -8,7 +8,12 @@ import logging
 import os
 import time
 import torch
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+import glob
 from PIL import Image
+
 from torchvision import transforms
 
 from config import Configuration
@@ -84,3 +89,24 @@ def classify_image(model_id, img_id):
     img.close()
     time.sleep(5)
     return output
+
+
+def plot_histogram(path, hist_path):
+    """A function to plot and save the histogram f a specific image and
+    save the histogram in a specific directory"""
+    im = cv2.imread(path)
+    vals = im.mean(axis=2).flatten()
+    counts, bins = np.histogram(vals, range(257))
+    plt.clf()   # not to overlap the images
+    plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
+    plt.xlim([-0.5, 255.5])
+    # plt.show()
+    saved_image = plt.savefig(hist_path)
+    return saved_image
+
+
+def clear_dir():
+    """A function to delete the content of a directory"""
+    files = glob.glob('app/static/imagenet_histogram')
+    for f in files:
+        os.remove(f)
