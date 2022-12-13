@@ -105,6 +105,19 @@ def plot_histogram(path, hist_path):
     return saved_image
 
 
+def plot_histogram_rgb(path, hist_path):
+    im = cv2.imread(path)
+    color = ('b', 'g', 'r')
+    for i, col in enumerate(color):
+        histr = cv2.calcHist([im], [i], None, [256], [0, 256])
+        plt.plot(histr, color=col)
+        plt.xlim([0, 256])
+    # plt.show()
+    saved_image = plt.savefig(hist_path)
+    plt.clf()  # not to overlap the images
+    return saved_image
+
+
 def clear_dir():
     """A function to delete the content of a directory"""
     files = glob.glob('app/static/imagenet_histogram')

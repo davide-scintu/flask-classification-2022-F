@@ -6,7 +6,7 @@ from rq.job import Job
 from app import app
 from app.forms.classification_form import ClassificationForm
 from app.forms.classification_form_histogram import ClassificationFormHistogram
-from ml.classification_utils import classify_image, plot_histogram, clear_dir
+from ml.classification_utils import classify_image, plot_histogram, clear_dir, plot_histogram_rgb
 from config import Configuration
 
 config = Configuration()
@@ -52,6 +52,7 @@ def classifications_histogram():
         histogram_img_path = f'app/static/imagenet_histogram/hist_{image_id}'
 
         plot_histogram(img_path, histogram_img_path)
+        # plot_histogram_rgb(img_path, histogram_img_path)
 
         # histogram viewer with the corresponding image feedback
         return render_template('histogram_output.html', image_id=image_id)
