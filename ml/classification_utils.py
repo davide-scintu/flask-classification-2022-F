@@ -84,3 +84,8 @@ def classify_image(model_id, img_id):
     img.close()
     time.sleep(5)
     return output
+
+def transformation_handle():
+    # TODO: https://pillow.readthedocs.io/en/stable/reference/ImageEnhance.html AND https://wtforms.readthedocs.io/en/2.3.x/fields/
+    pass
+
