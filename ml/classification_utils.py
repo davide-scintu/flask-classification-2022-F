@@ -97,7 +97,7 @@ def plot_histogram(path, hist_path):
     im = cv2.imread(path)
     vals = im.mean(axis=2).flatten()
     counts, bins = np.histogram(vals, range(257))
-    plt.clf()   # not to overlap the images
+    plt.clf()   # to not overlap the images
     plt.bar(bins[:-1] - 0.5, counts, width=1, edgecolor='none')
     plt.xlim([-0.5, 255.5])
     # plt.show()
@@ -114,7 +114,7 @@ def plot_histogram_rgb(path, hist_path):
         plt.xlim([0, 256])
     # plt.show()
     saved_image = plt.savefig(hist_path)
-    plt.clf()  # not to overlap the images
+    plt.clf()  # to not overlap the images
     return saved_image
 
 
