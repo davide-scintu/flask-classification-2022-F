@@ -9,7 +9,6 @@ conf = Configuration()
 
 
 class TransformationForm(FlaskForm):
-    transformation = SelectField('transformation', choices=list_images(), validators=[DataRequired()])
-    # attributes added to only check if the routes work correctly
+    transformation = SelectField('transformation', choices=conf.transformation_parameters, validators=[DataRequired()])
     image = SelectField('image', choices=list_images(), validators=[DataRequired()])
     submit = SubmitField('Submit')
