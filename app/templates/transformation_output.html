@@ -13,34 +13,23 @@
 
     </style>
     <div class="row">
-        <div class="col">
+        <!-- <div class="col">
             <div class="card">
                 <img class="large-front-thumbnail"
                      src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
                      alt={{ image_id }}/>
             </div>
         </div>
-        <div class="col">
+        <div class="col"> -->
             <div class="card ">
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Label</th>
-                        <th scope="col">Score</th>
+                        <th scope="col">Transformation</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {% for r in results['data'] %}
-                        <tr>
-                            <th scope="row"></th>
-                            <td>{{ r[0] }}</td>
-                            <td>{{ "%.3f"|format(r[1]) }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
                 </table>
-                <a class="btn btn-primary" href="/classifications" role="button">Back</a>
+                <a class="btn btn-dark mb-2" href="/transformations" role="button">Back</a>
             </div>
         </div>
     </div>
