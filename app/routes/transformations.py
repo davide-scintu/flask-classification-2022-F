@@ -21,20 +21,9 @@ def transformations():
     if form.validate_on_submit():  # POST
         image_id = form.image.data
         transformation_id = form.transformation.data
+        # TODO: new handler
 
-        redis_url = Configuration.REDIS_URL
-        redis_conn = redis.from_url(redis_url)
-        with Connection(redis_conn):
-            q = Queue(name=Configuration.QUEUE)
-            job = Job.create(transformation_handler, kwargs={
-                "transformation_id": transformation_id,
-                "img_id": image_id
-            })
-            # TODO: new handler
-            task = q.enqueue_job(job)
-            # transformation_handler()
-
-        return render_template("transformation_output.html", image_id=image_id, jobID=task.get_id())
+        return render_template("transformation_output.html", image_id=image_id)
 
     # otherwise, it is a get request and should return the
     # image and transformation selector

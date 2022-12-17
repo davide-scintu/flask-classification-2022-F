@@ -13,21 +13,33 @@
 
     </style>
     <div class="row">
-        <!-- <div class="col">
+        <div class="col">
             <div class="card">
+                <thead>
+                    <h3>
+                        <th scope="col">Original Image</th>
+                    </h3>
+                </thead>
                 <img class="large-front-thumbnail"
                      src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
                      alt={{ image_id }}/>
             </div>
         </div>
-        <div class="col"> -->
+        <div class="col">
             <div class="card ">
-                <table class="table">
-                    <thead>
-                    <tr>
+                <thead>
+                    <h3>
                         <th scope="col">Transformation</th>
-                    </tr>
-                    </thead>
+                    </h3>
+                </thead>
+                <table class="table">
+                    <div class="col">
+                        <div class="card">
+                            <img class="large-front-thumbnail"
+                                src="{{ url_for('static', filename='imagenet_subset/'+image_id) }} "
+                                alt={{ image_id }}/>
+                        </div>
+                    </div>
                 </table>
                 <a class="btn btn-dark mb-2" href="/transformations" role="button">Back</a>
             </div>
