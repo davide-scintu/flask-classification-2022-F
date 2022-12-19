@@ -10,6 +10,8 @@ import time
 import torch
 from PIL import Image
 from torchvision import transforms
+from PIL import Image
+from PIL import ImageEnhance
 
 from config import Configuration
 
@@ -85,7 +87,18 @@ def classify_image(model_id, img_id):
     time.sleep(5)
     return output
 
-def transformation_handler(transformation_id, img_id ):
-    # TODO: https://pillow.readthedocs.io/en/stable/reference/ImageEnhance.html AND https://wtforms.readthedocs.io/en/2.3.x/fields/
-    pass
 
+def transformation_image(image, path, color_factor=1.0, brightness_factor=1.0, contrast_factor=1.0,
+                         sharpness_factor=1.0):  # default values
+
+    im = Image.open(image)  # open the image
+    col = ImageEnhance.Color(im)
+    im_col = col.enhance(color_factor)  # set the color factor
+    brh = ImageEnhance.Brightness(im_col)
+    im_col_brh = brh.enhance(brightness_factor)  # set brightness factor to the previous modified image
+    con = ImageEnhance.Contrast(im_col_brh)
+    im_cal_brh_con = con.enhance(contrast_factor)  # set contrast factor to the previous modified image
+    sharp = ImageEnhance.Sharpness(im_cal_brh_con)
+    im_cal_brh_con_sharp = sharp.enhance(sharpness_factor)  # set sharpness factor to the previous modified image
+    # im_cal_brh_con_sharp.show()
+    im_cal_brh_con_sharp.save(path)

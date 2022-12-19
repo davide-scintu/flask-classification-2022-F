@@ -67,7 +67,8 @@ sharp = ImageEnhance.Sharpness(im)
 # im.save("with_text.png")
 
 
-def transformation_image(image, color_factor=1.0, brightness_factor=1.0, contrast_factor=1.0,
+def transformation_image(image, color_factor=1.0, brightness_factor=1.0,
+                         contrast_factor=1.0,
                          sharpness_factor=1.0):  # default values
     im = Image.open(image)  # open the image
     col = ImageEnhance.Color(im)
@@ -79,10 +80,9 @@ def transformation_image(image, color_factor=1.0, brightness_factor=1.0, contras
     sharp = ImageEnhance.Sharpness(im_cal_brh_con)
     im_cal_brh_con_sharp = sharp.enhance(sharpness_factor)  # set sharpness factor to the previous modified image
     im_cal_brh_con_sharp.show()
-    im_cal_brh_con_sharp.save(f'app/static/imagenet_transform/trans_{im_cal_brh_con_sharp}.png')
 
 
 img_test = 'app/static/imagenet_subset/n01443537_goldfish.JPEG'
 # im.show()
 transformation_image(img_test, color_factor=1.0, brightness_factor=1.3, contrast_factor=1.0, sharpness_factor=3.0)
-# plt.savefig(f'app/static/imagenet_transform/trans_{img_transformed}')
+
