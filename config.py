@@ -9,12 +9,7 @@ class Configuration:
     # classification
     image_folder_path = os.path.join(project_root, 'app/static/imagenet_subset')
     models = ('resnet18', 'alexnet', 'vgg16', 'inception_v3',)
-    # image transformation
-    transformation_parameters = ('color', 'brightness', 'contrast', 'sharpness')
-    color_input = ('Default', '0.0', '0.5', '1.0', '1.5', '2.0')
-    brightness_input = ('Default', '0.0', '0.5', '1.0', '1.5', '2.0')
-    contrast_input = ('Default', '0.0', '0.5', '1.0', '1.5', '2.0')
-    sharpness_input = ('Default', '0.0', '0.5', '1.0', '1.5', '2.0')
+
     # web server
     SECRET_KEY = os.environ.get('SECRET_KEY') or '9cj328s61hsd8'
     # queue
