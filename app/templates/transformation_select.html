@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Select Transformation and Image</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <h4>
+            Transformation:
+        </h4>
+        <p>
+            Color:
+            {{ form.color() }}
+        </p>
+         <p>
+            Brightness:
+            {{ form.brightness() }}
+        </p>
+         <p>
+            Contrast:
+            {{ form.contrast() }}
+        </p>
+         <p>
+            Sharpness:
+            {{ form.sharpness() }}
+        </p>
+
+        <h4>
+            Image:
+        </h4>
+        <p>
+            {{ form.image }}
+        </p>
+        <button type="submit" class="btn btn-dark mb-2">Submit</button>
+    </form>
+{% endblock %}

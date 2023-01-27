@@ -15,6 +15,8 @@ import glob
 from PIL import Image
 
 from torchvision import transforms
+from PIL import Image
+from PIL import ImageEnhance
 
 from config import Configuration
 
@@ -91,6 +93,21 @@ def classify_image(model_id, img_id):
     return output
 
 
+def transformation_image(image, path, color_factor=1.0, brightness_factor=1.0, contrast_factor=1.0,
+                         sharpness_factor=1.0):  # default values
+    """Modify an input image sequentially adding enhancements saving the results in a specific directory"""
+
+    im = Image.open(image)
+    col = ImageEnhance.Color(im)
+    im_col = col.enhance(color_factor)
+    brh = ImageEnhance.Brightness(im_col)
+    im_col_brh = brh.enhance(brightness_factor)
+    con = ImageEnhance.Contrast(im_col_brh)
+    im_cal_brh_con = con.enhance(contrast_factor)
+    sharp = ImageEnhance.Sharpness(im_cal_brh_con)
+    im_cal_brh_con_sharp = sharp.enhance(sharpness_factor)
+    im_cal_brh_con_sharp.save(path)
+
 def plot_histogram(path, hist_path):
     """A function to plot and save the histogram f a specific image and
     save the histogram in a specific directory"""
@@ -123,3 +140,4 @@ def clear_dir():
     files = glob.glob('app/static/imagenet_histogram')
     for f in files:
         os.remove(f)
+
