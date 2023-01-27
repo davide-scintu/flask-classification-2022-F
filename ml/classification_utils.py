@@ -90,15 +90,15 @@ def classify_image(model_id, img_id):
 
 def transformation_image(image, path, color_factor=1.0, brightness_factor=1.0, contrast_factor=1.0,
                          sharpness_factor=1.0):  # default values
+    """Modify an input image sequentially adding enhancements saving the results in a specific directory"""
 
-    im = Image.open(image)  # open the image
+    im = Image.open(image)
     col = ImageEnhance.Color(im)
-    im_col = col.enhance(color_factor)  # set the color factor
+    im_col = col.enhance(color_factor)
     brh = ImageEnhance.Brightness(im_col)
-    im_col_brh = brh.enhance(brightness_factor)  # set brightness factor to the previous modified image
+    im_col_brh = brh.enhance(brightness_factor)
     con = ImageEnhance.Contrast(im_col_brh)
-    im_cal_brh_con = con.enhance(contrast_factor)  # set contrast factor to the previous modified image
+    im_cal_brh_con = con.enhance(contrast_factor)
     sharp = ImageEnhance.Sharpness(im_cal_brh_con)
-    im_cal_brh_con_sharp = sharp.enhance(sharpness_factor)  # set sharpness factor to the previous modified image
-    # im_cal_brh_con_sharp.show()
+    im_cal_brh_con_sharp = sharp.enhance(sharpness_factor)
     im_cal_brh_con_sharp.save(path)
