@@ -3,7 +3,7 @@ from PIL import Image
 from PIL import ImageFilter
 from PIL import ImageEnhance
 from PIL import ImageDraw
-
+import uuid
 
 def transformation_image(image, path, color_factor=1.0, brightness_factor=1.0,
                          contrast_factor=1.0,
